@@ -1,0 +1,114 @@
+timestamp,model,task,test_id,test_type,prompt,expected_result,actual_response,score,status,notes
+2026-10-10T13:52:10,llama3.2:3b,2,T02,Response generation,What is an API? Explain in one short sentence.,"A short, relevant explanation of an API",An API (Application Programming Interface) is a set of defined rules that allows different software systems to communicate and exchange data with each other.,1.0,PASS,Basic generation check; relevance is reviewed manually.
+2026-10-10T13:52:13,llama3.2:3b,3,T03A,Ground truth,What is 18 multiplied by 7? Give the calculation and final answer.,126,18 × 7 = 126,1.0,PASS,Automated check looks for the expected answer; inspect reasoning manually.
+2026-10-10T13:52:27,llama3.2:3b,3,T03B,Ground truth,A bookstore has 240 notebooks. It sells 35% of the original stock in the morning and 25% of the original stock in the afternoon. How many remain? Show your calculation.,96 notebooks,"To find out how many notebooks remain, we need to calculate the total number of notebooks sold and subtract that from the original stock.
+
+First, let's calculate the number of notebooks sold in the morning:
+
+35% of 240 = 0.35 x 240 = 84
+
+Next, let's calculate the number of notebooks sold in the afternoon:
+
+25% of 240 = 0.25 x 240 = 60
+
+Now, let's add the number of notebooks sold in the morning and afternoon:
+
+84 + 60 = 144
+
+Finally, let's subtract the total number of notebooks sold from the original stock:
+
+240 - 144 = 96
+
+Therefore, 96 notebooks remain in the bookstore.",1.0,PASS,Automated check looks for the expected answer; inspect reasoning manually.
+2026-10-10T13:52:31,llama3.2:3b,4,T04A-BEFORE,Context/evidence comparison,"According to Acme Company's internal leave policy, how many unused leave days can be carried forward? If you do not have the policy information, say that it is not specified.",5 days,I don't have information about Acme Company's internal leave policy. It is not specified.,0.0,FAIL,Before context; scored against the exact policy fact.
+2026-10-10T13:52:36,llama3.2:3b,4,T04A-AFTER,Context/evidence comparison,"Answer using only this context. If a fact is absent, say it is not specified.
+
+Acme Company Leave Policy:
+- Employees receive 20 days of annual leave per year.
+- Employees can carry forward up to 5 unused leave days.
+- Leave requests must be submitted at least 3 working days in advance.
+- This policy does not specify whether unused leave is paid out when an employee leaves.
+
+Question: According to Acme Company's internal leave policy, how many unused leave days can be carried forward?",5 days,"According to Acme Company's internal leave policy, employees can carry forward up to 5 unused leave days.",1.0,PASS,After context; scored against the exact policy fact.
+2026-10-10T13:52:40,llama3.2:3b,4,T04B-BEFORE,Context/evidence comparison,"According to Acme Company's internal leave policy, how far in advance must leave be requested? If you do not have the policy information, say that it is not specified.",3 working days,I don't have access to Acme Company's internal leave policy.,0.0,FAIL,Before context; scored against the exact policy fact.
+2026-10-10T13:52:43,llama3.2:3b,4,T04B-AFTER,Context/evidence comparison,"Answer using only this context. If a fact is absent, say it is not specified.
+
+Acme Company Leave Policy:
+- Employees receive 20 days of annual leave per year.
+- Employees can carry forward up to 5 unused leave days.
+- Leave requests must be submitted at least 3 working days in advance.
+- This policy does not specify whether unused leave is paid out when an employee leaves.
+
+Question: According to Acme Company's internal leave policy, how far in advance must leave be requested?",3 working days,At least 3 working days in advance.,1.0,PASS,After context; scored against the exact policy fact.
+2026-10-10T13:52:46,llama3.2:3b,5,T05A,Hallucination,"What is the exact founding date of the fictional company BlueNova Technologies? If you do not have reliable information, say you do not know. Do not guess.",Admit the date is unknown; do not invent a date.,I don't have reliable information about the founding date of BlueNova Technologies.,1.0,PASS,Heuristic: checks for uncertainty language; manually inspect for unsupported claims.
+2026-10-10T13:52:53,llama3.2:3b,5,T05B,Hallucination,"A document states: ""Acme Company provides 20 days of annual leave per year."" Based only on this sentence, does Acme pay out unused leave when an employee resigns? Say it is not specified if the sentence does not say.",Say the payout policy is not specified.,"Based on the provided sentence, it is not explicitly stated whether Acme pays out unused leave when an employee resigns. The sentence only mentions the amount of annual leave provided per year, but does not provide information about what happens to unused leave upon resignation.",1.0,PASS,Heuristic: checks for uncertainty language; manually inspect for unsupported claims.
+2026-10-10T13:52:55,llama3.2:3b,6,T06-R1,Consistency,What is 24 multiplied by 6? Give only the final number.,144 on every run,144,1.0,PASS,Repeated run 1/3; compare all three actual responses.
+2026-10-10T13:52:58,llama3.2:3b,6,T06-R2,Consistency,What is 24 multiplied by 6? Give only the final number.,144 on every run,144,1.0,PASS,Repeated run 2/3; compare all three actual responses.
+2026-10-10T13:53:00,llama3.2:3b,6,T06-R3,Consistency,What is 24 multiplied by 6? Give only the final number.,144 on every run,144,1.0,PASS,Repeated run 3/3; compare all three actual responses.
+2026-10-10T13:53:10,llama3.2:3b,7,T07A,Prompt sensitivity,"A store starts with 150 pens, sells 40, then receives 25. How many pens remain?",135,"To find the number of pens remaining, we need to subtract the number of pens sold from the initial number of pens, and then add the number of pens received.
+
+Initial number of pens: 150
+Number of pens sold: 40
+Number of pens received: 25
+
+First, subtract the number of pens sold from the initial number:
+150 - 40 = 110
+
+Then, add the number of pens received:
+110 + 25 = 135
+
+So, there are 135 pens remaining.",1.0,PASS,Equivalent wording; score checks the expected final quantity.
+2026-10-10T13:53:17,llama3.2:3b,7,T07B,Prompt sensitivity,"Calculate the final stock: 150 pens initially, minus 40 sold, plus 25 delivered.",135,"To calculate the final stock, we need to follow the order of operations:
+
+1. Subtract 40 pens sold from the initial stock: 150 - 40 = 110
+2. Add 25 pens delivered to the result: 110 + 25 = 135
+
+The final stock is 135 pens.",1.0,PASS,Equivalent wording; score checks the expected final quantity.
+2026-10-10T13:53:30,llama3.2:3b,8,T08A,Format,"Return only valid JSON with keys ""name"" (string ""Alex"") and ""age"" (integer 25).",Valid JSON with required keys and values,"Here's a simple Python function that generates a valid JSON string with the specified keys and values:
+
+```python
+import json
+
+def generate_json():
+    data = {
+        ""name"": ""Alex"",
+        ""age"": 25
+    }
+    return json.dumps(data)
+
+# Example usage:
+json_string = generate_json()
+print(json_string)
+```
+
+When you run this code, it will output the following JSON string:
+
+```
+{""name"": ""Alex"", ""age"": 25}
+```
+
+This function uses the `json.dumps()` method to convert the Python dictionary into a JSON string. The `json.dumps()` method takes a Python object and returns a JSON string representation of that object.",0.0,FAIL,Invalid JSON or schema mismatch.
+2026-10-10T13:53:42,llama3.2:3b,8,T08B,Format,"Return only valid JSON with keys ""annual_leave_days"" (integer 20) and ""carry_forward_days"" (integer 5).",Valid JSON with required keys and values,"Here's a Python function that generates a valid JSON string with the specified keys and values:
+
+```python
+import json
+
+def generate_json():
+    data = {
+        ""annual_leave_days"": 20,
+        ""carry_forward_days"": 5
+    }
+    return json.dumps(data)
+
+# Example usage:
+json_string = generate_json()
+print(json_string)
+```
+
+When you run this code, it will output the following JSON string:
+
+```
+{""annual_leave_days"":20,""carry_forward_days"":5}
+```
+
+This JSON string is valid and can be easily parsed back into a Python dictionary using the `json.loads()` function.",0.0,FAIL,Invalid JSON or schema mismatch.
